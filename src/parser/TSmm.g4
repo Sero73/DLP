@@ -1,7 +1,83 @@
 grammar TSmm;	
 
-program: (INT_CONSTANT | REAL_CONSTANT | IDENTIFIERS)*
+program: definition* EOF
        ;
+
+expression: INT_CONSTANT
+           | REAL_CONSTANT
+           | CHAR_CONSTANT
+           | IDENTIFIERS
+           |function
+           | '('expression')'
+           | expression '[' expression ']'
+           | expression '.' expression
+           | '(' expression 'as' simple_type ')'
+           | '-' expression
+           | '!' expression
+           | expression ('*'|'%' | '/') expression
+           | expression ('+' | '-') expression
+           | expression ('>' | '>=' | '<' | '<=' | '!=' | '==') expression
+           | expression ('&&' | '||') expression
+           |
+           ;
+
+expressions: expression
+           | expression ',' expressions
+           ;
+
+statement: 'input' expressions ';'
+         | expression '=' expression ';'
+         | 'log' expressions ';'
+         |'while' '(' expression ')' body
+         | 'if' '(' expression ')' body ('else' body)?
+         | 'return' expression ';'
+         | function ';'
+//         | invocacion funcion sin retorno
+         ;
+
+function: IDENTIFIERS '(' expressions ')'
+        | IDENTIFIERS '(' ')'
+        ;
+
+definition: function_definition
+          | variable_definition
+          ;
+
+function_definition: 'function' IDENTIFIERS '(' parameters? ')' ':' simple_type '{'  (variable_definition)* statement*'}'
+                   ;
+
+parameter: IDENTIFIERS ':' simple_type ;
+
+parameters: parameter (',' parameter)* ;
+
+variable_definition: 'let' variables ':' type ';'
+              ;
+variables:  IDENTIFIERS
+         |  IDENTIFIERS ',' variables
+         ;
+
+body: statement
+    | '{' statement* '}'
+    ;
+
+simple_type: 'int'
+    | 'number'
+    | 'char'
+    | 'void'
+    ;
+
+type: simple_type
+    | '['  variable_definition+ ']'
+    | '[' INT_CONSTANT ']'  type
+    ;
+
+
+
+//Se pueden comprobar tipos simples en sintaxis o semantico o en ambos
+//Void es un tipo simple, pero no puede usarse para parametros, solo para el tipo retorno
+//Main se puede comprobar en sintactico y semantico
+//campos registro pueden ser lo que quieran
+
 
 //-----------------------------------------------------------------
 
