@@ -1,6 +1,7 @@
 grammar TSmm;	
 
-program: definition* EOF
+program: function_main definition* EOF
+         | definition* function_main EOF
        ;
 
 expression: INT_CONSTANT
@@ -32,12 +33,12 @@ statement: 'input' expressions ';'
          | 'if' '(' expression ')' body ('else' body)?
          | 'return' expression ';'
          | function ';'
-//         | invocacion funcion sin retorno
          ;
 
 function: IDENTIFIERS '(' expressions ')'
         | IDENTIFIERS '(' ')'
         ;
+
 
 definition: function_definition
           | variable_definition
@@ -45,6 +46,9 @@ definition: function_definition
 
 function_definition: 'function' IDENTIFIERS '(' parameters? ')' ':' simple_type '{'  (variable_definition)* statement*'}'
                    ;
+
+function_main: 'function' 'main' '(' ')' ':' simple_type '{'  (variable_definition)* statement*'}'
+             ;
 
 parameter: IDENTIFIERS ':' simple_type ;
 
@@ -60,11 +64,14 @@ body: statement
     | '{' statement* '}'
     ;
 
-simple_type: 'int'
-    | 'number'
-    | 'char'
+simple_type: simple_type_parameter
     | 'void'
     ;
+
+simple_type_parameter: 'int'
+                     | 'number'
+                     | 'char'
+                     ;
 
 type: simple_type
     | '['  variable_definition+ ']'
