@@ -4,6 +4,7 @@ program: function_main definition* EOF
          | definition* function_main EOF
        ;
 
+//Expresiones
 expression: INT_CONSTANT
            | REAL_CONSTANT
            | CHAR_CONSTANT
@@ -26,6 +27,8 @@ expressions: expression
            | expression ',' expressions
            ;
 
+
+//Statements
 statement: 'input' expressions ';'
          | expression '=' expression ';'
          | 'log' expressions ';'
@@ -35,20 +38,32 @@ statement: 'input' expressions ';'
          | function ';'
          ;
 
+body: statement
+    | '{' statement* '}'
+    ;
+
+//Functions
 function: IDENTIFIERS '(' expressions ')'
         | IDENTIFIERS '(' ')'
         ;
+
+function_main: 'function' 'main' '(' ')' ':' simple_type '{'  (variable_definition)* statement*'}'
+             ;
+
+//Variables
+variables:  IDENTIFIERS
+         |  IDENTIFIERS ',' variables
+         ;
 
 
 definition: function_definition
           | variable_definition
           ;
 
+//Definitions
 function_definition: 'function' IDENTIFIERS '(' parameters? ')' ':' simple_type '{'  (variable_definition)* statement*'}'
                    ;
 
-function_main: 'function' 'main' '(' ')' ':' simple_type '{'  (variable_definition)* statement*'}'
-             ;
 
 parameter: IDENTIFIERS ':' simple_type ;
 
@@ -56,17 +71,13 @@ parameters: parameter (',' parameter)* ;
 
 variable_definition: 'let' variables ':' type ';'
               ;
-variables:  IDENTIFIERS
-         |  IDENTIFIERS ',' variables
-         ;
 
-body: statement
-    | '{' statement* '}'
-    ;
 
+
+//Tipos
 simple_type: simple_type_parameter
-    | 'void'
-    ;
+           | 'void'
+           ;
 
 simple_type_parameter: 'int'
                      | 'number'
