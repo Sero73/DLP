@@ -2,5 +2,5 @@ package ast.types;
 
 import ast.Type;
 
-public class intType implements Type {
+public class IntType implements Type {
 }

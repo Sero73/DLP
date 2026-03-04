@@ -1,4 +1,4 @@
-package ast.defintions;
+package ast.definitions;
 
 import ast.AbstractLocatable;
 import ast.Definition;
@@ -7,14 +7,16 @@ import ast.Type;
 
 import java.util.List;
 
-public class VariableDefinition extends AbstractLocatable implements Statement, Definition {
+public class FunctionDefinition extends AbstractLocatable implements Definition {
     private List<Statement> statements;
     private String name;
     private Type type;
 
-    public VariableDefinition(int line, int column, List<Statement> statements,  String name, Type type) {
+    public FunctionDefinition( int line, int column, List<Statement> statements, String name, Type type) {
         super(line, column);
         this.statements = statements;
+        this.name = name;
+        this.type = type;
     }
 
     public List<Statement> getStatements() {

@@ -1,18 +1,17 @@
 package ast.types;
 
-import ast.Expression;
 import ast.Type;
-import ast.defintions.VariableDefinition;
+import ast.definitions.VariableDefinition;
 
 import java.util.List;
 
 public class FunctionType implements Type {
     private Type returnType;
-    private List<VariableDefinition> variablesDefinitions;
+    private List<VariableDefinition> paramaters;
 
-    public FunctionType(Type returnType, List<VariableDefinition> variablesDefinitions) {
+    public FunctionType(Type returnType, List<VariableDefinition> parameters) {
         this.returnType = returnType;
-        this.variablesDefinitions = variablesDefinitions;
+        this.paramaters = parameters;
     }
 
     public Type getReturnType() {
@@ -20,7 +19,7 @@ public class FunctionType implements Type {
     }
 
     public List<VariableDefinition> getVariablesDefinitions() {
-        return variablesDefinitions;
+        return paramaters;
     }
 
 

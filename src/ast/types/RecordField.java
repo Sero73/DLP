@@ -17,6 +17,7 @@ public class RecordField extends AbstractLocatable {
     public String getName() {
         return name;
     }
+
     public Type getType() {
         return type;
     }
