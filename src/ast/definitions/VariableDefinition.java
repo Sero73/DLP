@@ -7,25 +7,10 @@ import ast.Type;
 
 import java.util.List;
 
-public class VariableDefinition extends AbstractLocatable implements Statement, Definition {
-    private List<Statement> statements;
-    private String name;
-    private Type type;
+public class VariableDefinition extends AbstractDefinition implements Statement, Definition {
 
     public VariableDefinition(int line, int column, String name, Type type) {
-        super(line, column);
-        this.name = name;
-        this.type = type;
+        super(line, column, name, type);
     }
 
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Type getType() {
-        return type;
-    }
 }

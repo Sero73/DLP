@@ -49,7 +49,7 @@ statement returns [List<Statement> ast = new ArrayList<>()] locals [List<Stateme
                                     }
                                 }
          |'while' '(' e1=expression ')' b1=body {$ast.add(new While($e1.ast.getLine(),$e1.ast.getColumn(),$e1.ast, $b1.ast));}
-         | 'if' '(' e1=expression ')' b1=body ('else' b1=body)?
+         | 'if' '(' e1=expression ')' b1=body ('else' b2=body {$elseBody.addAll($b2.ast);})? {$ast.add(new IfElse($e1.ast.getLine(), $e1.ast.getColumn(), $e1.ast, $b1.ast, $elseBody ));}
          | 'return' e1=expression ';' {$ast.add(new Return($e1.ast.getLine(), $e1.ast.getColumn(),$e1.ast));}
          | function ';' {$ast.add($function.ast);}
          ;
@@ -68,7 +68,7 @@ function returns[FunctionInvocation ast] locals [List<Expression> arguments = ne
 
 function_main returns [FunctionDefinition ast] locals [List<Statement> statements = new ArrayList<Statement>(), List<VariableDefinition> varDefs = new ArrayList<VariableDefinition>()]:
              f='function' 'main' '(' ')' ':' 'void' '{'  (variable_definition {$statements.addAll($variable_definition.ast);})* (statement{$statements.addAll($statement.ast);})* '}'
-             {$ast = new FunctionDefinition($f.getLine(), $f.getCharPositionInLine()+1, $statements, "main", new FunctionType(new VoidType(), new ArrayList<VariableDefinition>())); }
+             {$ast = new FunctionDefinition($f.getLine(), $f.getCharPositionInLine()+1, $statements, "main", new FunctionType(VoidType.getInstance(), new ArrayList<VariableDefinition>())); }
              ;
 
 
@@ -78,11 +78,10 @@ definition returns [List<Definition> ast = new ArrayList<>()]:
           ;
 
 //Definitions
-function_definition returns  [FunctionDefinition ast] locals [List<Statement> statements = new ArrayList<>(), List<VariableDefinition> params = new ArrayList<>(), Type returnType = new VoidType() ]:
+function_definition returns  [FunctionDefinition ast] locals [List<Statement> statements = new ArrayList<>(), List<VariableDefinition> params = new ArrayList<>(), Type returnType = VoidType.getInstance() ]:
                    'function' id1=ID '(' (parameters{$params.addAll($parameters.ast);})? ')' ':' (t=simple_type {$returnType = $t.ast;} | 'void') '{'  (variable_definition{$statements.addAll($variable_definition.ast);})* (statement {$statements.addAll($statement.ast);})*'}'
                    {$ast =  new FunctionDefinition($id1.getLine(), $id1.getCharPositionInLine()+1 ,$statements, $id1.text, new FunctionType($returnType, $params));}
                    ;
-
 
 //parameter: ID ':' simple_type ;
 
@@ -91,15 +90,14 @@ parameters returns[List<VariableDefinition> ast = new ArrayList<>()]:
         (',' id2=ID ':' type2=simple_type {$ast.add(new VariableDefinition($id2.getLine(),$id2.getCharPositionInLine()+1, $id2.text, $type2.ast));})*
         ;
 
-
 variable returns[Variable ast]:
           ID {$ast = (new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
           ;
 
-variables returns[List<Variable> ast = new ArrayList<>()]:
-         ID {$ast.add(new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
-         |  ID ',' variables {$ast.addAll($variables.ast);}
-         ;
+//variables returns[List<Variable> ast = new ArrayList<>()]:
+//         ID {$ast.add(new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
+//         |  ID ',' variables {$ast.addAll($variables.ast);}
+//         ;
 
 variable_definition returns[List<VariableDefinition> ast = new ArrayList<>()] locals [List<Token> vars = new ArrayList<>()]:
               'let' id1=ID {$vars.add($id1);} (',' id2=ID {$vars.add($id2);})* ':' type ';'
@@ -112,9 +110,9 @@ variable_definition returns[List<VariableDefinition> ast = new ArrayList<>()] lo
               ;
 
 simple_type returns[Type ast]:
-           'int' {$ast = new IntType();}
-           | 'number' {$ast = new NumberType();}
-           | 'char' {$ast = new CharType();}
+           'int' {$ast = IntType.getInstance();}
+           | 'number' {$ast = NumberType.getInstance();}
+           | 'char' {$ast = CharType.getInstance();}
            ;
 
 type returns[Type ast] locals [List<RecordField> recordFields = new ArrayList<>()]:
@@ -133,6 +131,7 @@ type returns[Type ast] locals [List<RecordField> recordFields = new ArrayList<>(
 
 //-----------------------------------------------------------------
 
+//Lexico
 
 //Fragmentos
 fragment DIGITO: [0-9]
