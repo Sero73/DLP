@@ -6,12 +6,23 @@ import java.util.List;
 
 public class RecordType implements Type {
     private List<RecordField> recordFields;
+    private int column;
+    private int line;
 
-    public RecordType(List<RecordField> recordFields) {
+    public RecordType(int columnm, int line,List<RecordField> recordFields) {
         this.recordFields = recordFields;
+        this.column = columnm;
+        this.line = line;
     }
 
     public List<RecordField> getRecordFields() {
         return recordFields;
     }
+    public int getColumn() {
+        return column;
+   }
+
+   public int getLine() {
+        return line;
+   }
 }

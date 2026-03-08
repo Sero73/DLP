@@ -62,8 +62,8 @@ body returns[List<Statement> ast = new ArrayList<Statement>()]:
 //Functions
 function returns[FunctionInvocation ast] locals [List<Expression> arguments = new ArrayList<Expression>()]:
 
-        variable '(' (expressions {$arguments.addAll($expressions.ast);})? ')'
-        {$ast = new FunctionInvocation($variable.ast.getLine(), $variable.ast.getColumn(), $arguments, $variable.ast);}
+        ID '(' (expressions {$arguments.addAll($expressions.ast);})? ')'
+        {$ast = new FunctionInvocation($ID.getLine(), $ID.getCharPositionInLine()+1, $arguments,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1, $ID.text));}
         ;
 
 function_main returns [FunctionDefinition ast] locals [List<Statement> statements = new ArrayList<Statement>(), List<VariableDefinition> varDefs = new ArrayList<VariableDefinition>()]:
@@ -89,25 +89,32 @@ parameters returns[List<VariableDefinition> ast = new ArrayList<>()]:
         id1=ID ':' type1=simple_type {$ast.add(new VariableDefinition($id1.getLine(), $id1.getCharPositionInLine()+1, $id1.text, $type1.ast));}
         (',' id2=ID ':' type2=simple_type {$ast.add(new VariableDefinition($id2.getLine(),$id2.getCharPositionInLine()+1, $id2.text, $type2.ast));})*
         ;
+//
+//variable returns[Variable ast]:
+//          ID {$ast = (new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
+//          ;
 
-variable returns[Variable ast]:
-          ID {$ast = (new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
-          ;
+variables returns[List<Variable> ast = new ArrayList<>()]:
+         id1=ID { $ast.add(new Variable($id1.getLine(), $id1.getCharPositionInLine() + 1, $id1.getText())); }
+         (',' id2=ID { $ast.add(new Variable($id2.getLine(), $id2.getCharPositionInLine() + 1, $id2.getText())); } )*
+         ;
 
-//variables returns[List<Variable> ast = new ArrayList<>()]:
-//         ID {$ast.add(new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
-//         |  ID ',' variables {$ast.addAll($variables.ast);}
-//         ;
+//variable_definition returns[List<VariableDefinition> ast = new ArrayList<>()] locals [List<Token> vars = new ArrayList<>()]:
+//              'let' id1=ID {$vars.add($id1);} (',' id2=ID {$vars.add($id2);})* ':' type ';'
+//              {
+//                for(Token var : $vars){
+//                    VariableDefinition varDef = new VariableDefinition(var.getLine(), var.getCharPositionInLine()+1, var.getText(), $type.ast);
+//                    $ast.add(varDef);
+//                }
+//              }
+//              ;
 
-variable_definition returns[List<VariableDefinition> ast = new ArrayList<>()] locals [List<Token> vars = new ArrayList<>()]:
-              'let' id1=ID {$vars.add($id1);} (',' id2=ID {$vars.add($id2);})* ':' type ';'
-              {
-                for(Token var : $vars){
-                    VariableDefinition varDef = new VariableDefinition(var.getLine(), var.getCharPositionInLine()+1, var.getText(), $type.ast);
-                    $ast.add(varDef);
+variable_definition returns [ List<VariableDefinition> ast = new ArrayList<VariableDefinition>() ]:
+            'let' variables ':' type  ';' {
+                for (Variable v: $variables.ast) {
+                    $ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast));
                 }
-              }
-              ;
+            };
 
 simple_type returns[Type ast]:
            'int' {$ast = IntType.getInstance();}
@@ -115,11 +122,22 @@ simple_type returns[Type ast]:
            | 'char' {$ast = CharType.getInstance();}
            ;
 
-type returns[Type ast] locals [List<RecordField> recordFields = new ArrayList<>()]:
+type returns[Type ast] : // locals [List<RecordField> recordFields = new ArrayList<>()]:
     simple_type {$ast = $simple_type.ast;}
-    | '['  (variable_definition {$recordFields.addAll($variable_definition.ast.stream().map(vDef -> new RecordField(vDef.getLine(), vDef.getColumn(), vDef.getName(), vDef.getType())).toList());})+ ']' {$ast = new RecordType($recordFields);}
+    //| '['  (variable_definition {$recordFields.addAll($variable_definition.ast.stream().map(vDef -> new RecordField(vDef.getLine(), vDef.getColumn(), vDef.getName(), vDef.getType())).toList());})+ ']' {$ast = new RecordType($recordFields);}
+    ||  | e='[' (record_field{ $ast = new RecordType($e.getLine(), $e.getCharPositionInLine()+1, $record_field.ast); })+ ']'
     | '[' INT_CONSTANT ']'  type {$ast = new ArrayType(LexerHelper.lexemeToInt($INT_CONSTANT.text), $type.ast);}
+    | 'void' {$ast = VoidType.getInstance();}
     ;
+
+
+record_field returns [ List<RecordField> ast = new ArrayList<RecordField>() ]:
+        ('let' variables ':' type ';' {
+
+            for (Variable v: $variables.ast) {
+                $ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+            }
+        })+;
 
 
 
@@ -149,7 +167,8 @@ WHITES: [ \n\t\r]+ -> skip
       ;
 
 //Comentarios
-SINGLE_LINE_COMMENT: '//' ~[\r\n]* -> skip
+SINGLE_LINE_COMMENT: //'//' ~[\r\n]* -> skip
+                    '//' .*? ('\r\n' | '\r' | '\n' | EOF) -> skip //otra forma
                    ;
 
 MULTILINE_COMMENT: '/*' .*? '*/' -> skip

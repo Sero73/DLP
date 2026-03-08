@@ -9,7 +9,7 @@ import ast.types.CharType;
 import javax.sound.sampled.Line;
 import java.util.List;
 
-public class AbstractDefinition extends AbstractLocatable implements Definition {
+public abstract class AbstractDefinition extends AbstractLocatable implements Definition {
 
     protected String name;
     protected Type type;
