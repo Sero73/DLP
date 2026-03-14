@@ -9,7 +9,7 @@ import ast.definitions.*;
 }
 
 program returns [Program ast] locals [List<Definition> definitions = new ArrayList<>()] :
-         (definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);}
+         (definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);} EOF
        ;
 
 //Expresiones
@@ -112,7 +112,10 @@ variables returns[List<Variable> ast = new ArrayList<>()]:
 variable_definition returns [ List<VariableDefinition> ast = new ArrayList<VariableDefinition>() ]:
             'let' variables ':' type  ';' {
                 for (Variable v: $variables.ast) {
-                    $ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+                    //$ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+                       VariableDefinition varDef =  new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast);
+                       if(!$ast.contains(varDef)){$ast.add(varDef);}
+                       else{ new ErrorType("La variable " + v.getName() + " ya se ha declarado.", varDef);}
                 }
             };
 
@@ -127,7 +130,6 @@ type returns[Type ast] : // locals [List<RecordField> recordFields = new ArrayLi
     //| '['  (variable_definition {$recordFields.addAll($variable_definition.ast.stream().map(vDef -> new RecordField(vDef.getLine(), vDef.getColumn(), vDef.getName(), vDef.getType())).toList());})+ ']' {$ast = new RecordType($recordFields);}
     ||  | e='[' (record_field{ $ast = new RecordType($e.getLine(), $e.getCharPositionInLine()+1, $record_field.ast); })+ ']'
     | '[' INT_CONSTANT ']'  type {$ast = new ArrayType(LexerHelper.lexemeToInt($INT_CONSTANT.text), $type.ast);}
-    | 'void' {$ast = VoidType.getInstance();}
     ;
 
 
@@ -135,17 +137,13 @@ record_field returns [ List<RecordField> ast = new ArrayList<RecordField>() ]:
         ('let' variables ':' type ';' {
 
             for (Variable v: $variables.ast) {
-                $ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+                //$ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+                RecordField recordField = new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast);
+                if(!$ast.contains(recordField)){$ast.add(recordField);}
+                else{new ErrorType("El campo " + v.getName() + " ya se ha declarado", recordField);}
             }
-        })+;
-
-
-
-//Se pueden comprobar tipos simples en sintaxis o semantico o en ambos
-//Void es un tipo simple, pero no puede usarse para parametros, solo para el tipo retorno
-//Main se puede comprobar en sintactico y semantico
-//campos registro pueden ser lo que quieran
-
+        })+
+       ;
 
 //-----------------------------------------------------------------
 
