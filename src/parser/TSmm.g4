@@ -8,9 +8,20 @@ import ast.types.*;
 import ast.definitions.*;
 }
 
-program returns [Program ast] locals [List<Definition> definitions = new ArrayList<>()] :
-         (definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);} EOF
-       ;
+program returns [Program ast] locals [List<Definition> definitions = new ArrayList<Definition>()] :
+            //(definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);} EOF
+            (definition {
+                        for (Definition def: $definition.ast) {
+                            if (!$definitions.contains(def)) {
+                                $definitions.add(def);
+                            }else{
+                                new ErrorType("La variable " + def.getName() + " ya se ha declarado" , def);
+                            }
+                        }
+                     })* function_main { $definitions.add($function_main.ast); }
+                     { $ast = new Program($definitions); } EOF
+
+            ;
 
 //Expresiones
 expression returns [Expression ast]:

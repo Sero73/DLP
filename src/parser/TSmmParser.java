@@ -120,7 +120,7 @@ public class TSmmParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
 		public Program ast;
-		public List<Definition> definitions = new ArrayList<>();
+		public List<Definition> definitions = new ArrayList<Definition>();
 		public DefinitionContext definition;
 		public Function_mainContext function_main;
 		public Function_mainContext function_main() {
@@ -155,7 +155,15 @@ public class TSmmParser extends Parser {
 					{
 					setState(30);
 					((ProgramContext)_localctx).definition = definition();
-					_localctx.definitions.addAll(((ProgramContext)_localctx).definition.ast);
+
+					                        for (Definition def: ((ProgramContext)_localctx).definition.ast) {
+					                            if (!_localctx.definitions.contains(def)) {
+					                                _localctx.definitions.add(def);
+					                            }else{
+					                                new ErrorType("La variable " + def.getName() + " ya se ha declarado" , def);
+					                            }
+					                        }
+					                     
 					}
 					} 
 				}
@@ -165,8 +173,8 @@ public class TSmmParser extends Parser {
 			}
 			setState(38);
 			((ProgramContext)_localctx).function_main = function_main();
-			_localctx.definitions.add(((ProgramContext)_localctx).function_main.ast);
-			((ProgramContext)_localctx).ast =  new Program(_localctx.definitions);
+			 _localctx.definitions.add(((ProgramContext)_localctx).function_main.ast); 
+			 ((ProgramContext)_localctx).ast =  new Program(_localctx.definitions); 
 			setState(41);
 			match(EOF);
 			}

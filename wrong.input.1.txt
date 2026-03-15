@@ -4,6 +4,9 @@ let tuple: [
 	let key:number; // Error: duplicated field
 ];
 
+let mandarina:int;
+let mandarina:char;
+
 // Main program
 function main(): void {
 	tuple.key = 0;
