@@ -3,6 +3,7 @@ package ast.statements;
 import ast.AbstractLocatable;
 import ast.Expression;
 import ast.Statement;
+import visitor.Visitor;
 
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class IfElse extends AbstractLocatable implements Statement {
 
     public List<Statement> getElseBody() {
         return elseBody;
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

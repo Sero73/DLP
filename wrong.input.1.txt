@@ -1,13 +1,6 @@
-let tuple: [
-	let key:int;
-	let value:int;
-	let key:number; // Error: duplicated field
-];
+// Lvalue required
 
-let mandarina:int;
-let mandarina:char;
-
-// Main program
-function main(): void {
-	tuple.key = 0;
+function main(): void{
+	let i:int;
+	(i+2) = 3;
 }

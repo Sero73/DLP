@@ -4,6 +4,7 @@ import ast.AbstractLocatable;
 import ast.Definition;
 import ast.Statement;
 import ast.Type;
+import visitor.Visitor;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,4 +28,8 @@ public class VariableDefinition extends AbstractDefinition implements Statement,
         return Objects.hash(name);
     }
 
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
+    }
 }

@@ -1,9 +1,9 @@
 package ast.expressions;
 
-import ast.AbstractLocatable;
 import ast.Expression;
+import visitor.Visitor;
 
-public class Variable extends AbstractLocatable implements Expression {
+public class Variable extends AbstractExpression implements Expression {
     private String name;
 
     public Variable(int line, int column, String name) {
@@ -13,5 +13,10 @@ public class Variable extends AbstractLocatable implements Expression {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

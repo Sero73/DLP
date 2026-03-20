@@ -4,6 +4,7 @@ import ast.AbstractLocatable;
 import ast.Definition;
 import ast.Statement;
 import ast.Type;
+import visitor.Visitor;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public class FunctionDefinition extends AbstractDefinition implements Definition
         return statements;
     }
 
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
+    }
 }

@@ -3,6 +3,7 @@ package ast.types;
 import ast.Locatable;
 import ast.Type;
 import errorhandler.ErrorHandler;
+import visitor.Visitor;
 
 public class ErrorType implements Type {
     private String cause;
@@ -25,5 +26,10 @@ public class ErrorType implements Type {
                 ", line=" + location.getLine() +
                 ", column=" + location.getColumn() +
                 '}';
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

@@ -1,6 +1,6 @@
 package ast;
 
-public class AbstractLocatable implements Locatable{
+public abstract class AbstractLocatable implements Locatable{
     protected int line;
     protected int column;
 
@@ -17,4 +17,5 @@ public class AbstractLocatable implements Locatable{
     public int getColumn() {
         return column;
     }
+
 }

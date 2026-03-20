@@ -1,10 +1,10 @@
 package ast.expressions;
 
-import ast.AbstractLocatable;
 import ast.Expression;
 import ast.Type;
+import visitor.Visitor;
 
-public class Cast extends AbstractLocatable implements Expression {
+public class Cast extends AbstractExpression implements Expression {
 
     private Expression expression;
     private Type castingType;
@@ -21,5 +21,11 @@ public class Cast extends AbstractLocatable implements Expression {
 
     public Type getCastingType() {
         return castingType;
+    }
+
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this, param);
     }
 }

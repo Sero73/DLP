@@ -1,6 +1,7 @@
 package ast.types;
 
 import ast.Type;
+import visitor.Visitor;
 
 import java.util.List;
 
@@ -25,4 +26,9 @@ public class RecordType implements Type {
    public int getLine() {
         return line;
    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
+    }
 }

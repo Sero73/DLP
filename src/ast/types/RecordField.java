@@ -2,6 +2,7 @@ package ast.types;
 
 import ast.AbstractLocatable;
 import ast.Type;
+import visitor.Visitor;
 
 import java.util.Objects;
 
@@ -35,5 +36,10 @@ public class RecordField extends AbstractLocatable {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

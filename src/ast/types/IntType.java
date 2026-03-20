@@ -1,6 +1,7 @@
 package ast.types;
 
 import ast.Type;
+import visitor.Visitor;
 
 public class IntType implements Type {
     //private static IntType instance = new IntType();
@@ -11,5 +12,10 @@ public class IntType implements Type {
             instance = new IntType();
         }
         return instance;
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

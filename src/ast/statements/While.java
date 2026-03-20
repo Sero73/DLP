@@ -3,6 +3,7 @@ package ast.statements;
 import ast.AbstractLocatable;
 import ast.Expression;
 import ast.Statement;
+import visitor.Visitor;
 
 import java.util.List;
 
@@ -22,5 +23,10 @@ public class While extends AbstractLocatable implements Statement {
 
     public List<Statement> getBody() {
         return body;
+    }
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this,param);
     }
 }

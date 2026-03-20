@@ -22,11 +22,11 @@ public abstract class AbstractDefinition extends AbstractLocatable implements De
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
     public Type getType() {
-        return null;
+        return type;
     }
 }

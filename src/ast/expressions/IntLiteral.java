@@ -1,9 +1,9 @@
 package ast.expressions;
 
-import ast.AbstractLocatable;
 import ast.Expression;
+import visitor.Visitor;
 
-public class IntLiteral extends AbstractLocatable implements Expression {
+public class IntLiteral extends AbstractExpression implements Expression {
 
     private int value;
 
@@ -14,5 +14,11 @@ public class IntLiteral extends AbstractLocatable implements Expression {
 
     public int getValue() {
         return value;
+    }
+
+
+    @Override
+    public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
+        return v.visit(this, param);
     }
 }

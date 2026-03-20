@@ -3,7 +3,7 @@ package ast.expressions;
 import ast.AbstractLocatable;
 import ast.Expression;
 
-public class BinaryOperation extends AbstractLocatable implements Expression {
+public abstract class BinaryOperation extends AbstractExpression implements Expression {
     protected Expression left;
     protected Expression right;
     protected String operator;
