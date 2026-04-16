@@ -1,4 +1,4 @@
-// Generated from C:/Users/Serop/Desktop/Clase2025-26/DLP/DLP/src/parser/TSmm.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Serop/Desktop/Clase2025-26/DLP/s8_casa/DLP/src/parser/TSmm.g4 by ANTLR 4.13.2
 package parser;
 
 import ast.*;
@@ -155,15 +155,7 @@ public class TSmmParser extends Parser {
 					{
 					setState(30);
 					((ProgramContext)_localctx).definition = definition();
-
-					                        for (Definition def: ((ProgramContext)_localctx).definition.ast) {
-					                            if (!_localctx.definitions.contains(def)) {
-					                                _localctx.definitions.add(def);
-					                            }else{
-					                                new ErrorType("La variable " + def.getName() + " ya se ha declarado" , def);
-					                            }
-					                        }
-					                     
+					_localctx.definitions.addAll(((ProgramContext)_localctx).definition.ast);
 					}
 					} 
 				}
@@ -173,8 +165,8 @@ public class TSmmParser extends Parser {
 			}
 			setState(38);
 			((ProgramContext)_localctx).function_main = function_main();
-			 _localctx.definitions.add(((ProgramContext)_localctx).function_main.ast); 
-			 ((ProgramContext)_localctx).ast =  new Program(_localctx.definitions); 
+			_localctx.definitions.add(((ProgramContext)_localctx).function_main.ast);
+			((ProgramContext)_localctx).ast =  new Program(_localctx.definitions);
 			setState(41);
 			match(EOF);
 			}
@@ -1280,10 +1272,7 @@ public class TSmmParser extends Parser {
 			match(T__22);
 
 			                for (Variable v: ((Variable_definitionContext)_localctx).variables.ast) {
-			                    //_localctx.ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), ((Variable_definitionContext)_localctx).type.ast));
-			                       VariableDefinition varDef =  new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), ((Variable_definitionContext)_localctx).type.ast);
-			                       if(!_localctx.ast.contains(varDef)){_localctx.ast.add(varDef);}
-			                       else{ new ErrorType("La variable " + v.getName() + " ya se ha declarado.", varDef);}
+			                    _localctx.ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), ((Variable_definitionContext)_localctx).type.ast));
 			                }
 			            
 			}
@@ -1507,12 +1496,11 @@ public class TSmmParser extends Parser {
 					setState(332);
 					match(T__22);
 
-
 					            for (Variable v: ((Record_fieldContext)_localctx).variables.ast) {
-					                //_localctx.ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), ((Record_fieldContext)_localctx).type.ast));
-					                RecordField recordField = new RecordField(v.getLine(), v.getColumn(), v.getName(), ((Record_fieldContext)_localctx).type.ast);
-					                if(!_localctx.ast.contains(recordField)){_localctx.ast.add(recordField);}
-					                else{new ErrorType("El campo " + v.getName() + " ya se ha declarado", recordField);}
+					                _localctx.ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), ((Record_fieldContext)_localctx).type.ast));
+					//                RecordField recordField = new RecordField(v.getLine(), v.getColumn(), v.getName(), ((Record_fieldContext)_localctx).type.ast);
+					//                if(!_localctx.ast.contains(recordField)){_localctx.ast.add(recordField);}
+					//                else{new ErrorType("El campo " + v.getName() + " ya se ha declarado", recordField);}
 					            }
 					        
 					}

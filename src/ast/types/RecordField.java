@@ -9,6 +9,7 @@ import java.util.Objects;
 public class RecordField extends AbstractLocatable {
     private String name;
     private Type type;
+    private int offset;
 
 
     public RecordField(int line, int column, String name, Type type) {
@@ -41,5 +42,13 @@ public class RecordField extends AbstractLocatable {
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
         return v.visit(this,param);
+    }
+
+    public int getOffset(){
+        return offset;
+    }
+
+    public void setOffset(int offset){
+        this.offset = offset;
     }
 }

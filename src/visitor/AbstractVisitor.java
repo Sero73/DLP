@@ -14,7 +14,6 @@ public abstract class AbstractVisitor<RT,PT> implements Visitor<RT,PT> {
 
     @Override
     public RT visit(Program program, PT param) {
-        System.out.println("Programa ");
         for(Definition def: program.getDefinitions()) {
             def.accept(this, param);
         }

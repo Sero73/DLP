@@ -1,0 +1,34 @@
+// Global variables
+let i: int;			//Offset 0
+let r: number; 		//Offset 2
+let c,d: char; 		//Offset 6
+let array: [10]int;
+
+// Functions
+function f(pi:int, pr:number): int {
+  let lr:number; 	//Offset -1
+  let li:int;		//Offset -3
+
+  li = pi;
+  lr = pr;
+  return pi;
+}
+
+// Main program
+function main(): void{
+  let pair: [ 	   	//Offset -3
+    let integer:int;	//Offset 0
+    let character:char;	 //Offset 2
+  ];
+
+  //i = 3;
+  c = 'a';
+  r = -c;
+  //r = 3.8;
+  if( 3.6 > 2 || c){
+    log(r);
+  }
+  pair.integer = i;
+  pair.character = c;
+  f( i, r);
+}

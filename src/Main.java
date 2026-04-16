@@ -1,4 +1,4 @@
-import visitor.VisitorLValue;
+import visitor.*;
 import org.antlr.v4.runtime.*;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorView;
@@ -6,7 +6,6 @@ import ast.ASTNode;
 import errorhandler.ErrorHandler;
 import parser.TSmmLexer;
 import parser.TSmmParser;
-import visitor.Visitor;
 //import semantic.TypeCheckingVisitor;
 
 public class Main {
@@ -26,7 +25,11 @@ public class Main {
 		TSmmParser parser = new TSmmParser(tokens);
 		ASTNode ast = parser.program().ast;
 
-		ast.accept(new VisitorLValue(),null);	  //Incorrect use of the Visitor pattern, Fix it!
+		ast.accept(new VisitorLValue(),null);
+		ast.accept(new IdentificationVisitor(),null);
+		ast.accept(new TypeCheckingVisitor(),null);
+		ast.accept(new OffsetVisitor(), null);
+
 
 		// * Check errors
 		if(ErrorHandler.getInstance().anyError()){

@@ -3,7 +3,7 @@ package ast.types;
 import ast.Type;
 import visitor.Visitor;
 
-public class VoidType implements Type {
+public class VoidType extends AbstractType {
     //private static VoidType instance = new VoidType();
     private static VoidType instance;
 
@@ -17,5 +17,15 @@ public class VoidType implements Type {
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
         return v.visit(this,param);
+    }
+
+    @Override
+    public String toString(){
+        return "void";
+    }
+
+    @Override
+    public int numberOfBytes() {
+        throw new UnsupportedOperationException("Variable cannot be null");
     }
 }

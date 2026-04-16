@@ -5,7 +5,7 @@ import ast.Type;
 import errorhandler.ErrorHandler;
 import visitor.Visitor;
 
-public class ErrorType implements Type {
+public class ErrorType extends AbstractType {
     private String cause;
     private Locatable location;
 

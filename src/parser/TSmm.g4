@@ -9,21 +9,9 @@ import ast.definitions.*;
 }
 
 program returns [Program ast] locals [List<Definition> definitions = new ArrayList<Definition>()] :
-            //(definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);} EOF
-            (definition {
-                        for (Definition def: $definition.ast) {
-                            if (!$definitions.contains(def)) {
-                                $definitions.add(def);
-                            }else{
-                                new ErrorType("La variable " + def.getName() + " ya se ha declarado" , def);
-                            }
-                        }
-                     })* function_main { $definitions.add($function_main.ast); }
-                     { $ast = new Program($definitions); } EOF
+            (definition {$definitions.addAll($definition.ast);})* function_main {$definitions.add($function_main.ast);} {$ast = new Program($definitions);} EOF
+          ;
 
-            ;
-
-//Expresiones
 expression returns [Expression ast]:
            INT_CONSTANT {$ast = new IntLiteral($INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine()+1, LexerHelper.lexemeToInt($INT_CONSTANT.text));}
            | REAL_CONSTANT {$ast = new NumberLiteral($REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine()+1, LexerHelper.lexemeToReal($REAL_CONSTANT.text));}
@@ -48,7 +36,6 @@ expressions returns [List<Expression> ast = new ArrayList<>()]:
            ;
 
 
-//Statements
 statement returns [List<Statement> ast = new ArrayList<>()] locals [List<Statement> elseBody = new ArrayList<>()]:
          e='input' expressions ';' {for(Expression expression : $expressions.ast){
                                     $ast.add(new Input($e.getLine(), $e.getCharPositionInLine()+1, expression));
@@ -70,7 +57,6 @@ body returns[List<Statement> ast = new ArrayList<Statement>()]:
     | '{' ( st2=statement {$ast.addAll($st2.ast);})+ '}'
     ;
 
-//Functions
 function returns[FunctionInvocation ast] locals [List<Expression> arguments = new ArrayList<Expression>()]:
 
         ID '(' (expressions {$arguments.addAll($expressions.ast);})? ')'
@@ -88,45 +74,25 @@ definition returns [List<Definition> ast = new ArrayList<>()]:
           | variable_definition {$ast.addAll($variable_definition.ast);}
           ;
 
-//Definitions
 function_definition returns  [FunctionDefinition ast] locals [List<Statement> statements = new ArrayList<>(), List<VariableDefinition> params = new ArrayList<>(), Type returnType = VoidType.getInstance() ]:
                    'function' id1=ID '(' (parameters{$params.addAll($parameters.ast);})? ')' ':' (t=simple_type {$returnType = $t.ast;} | 'void') '{'  (variable_definition{$statements.addAll($variable_definition.ast);})* (statement {$statements.addAll($statement.ast);})*'}'
                    {$ast =  new FunctionDefinition($id1.getLine(), $id1.getCharPositionInLine()+1 ,$statements, $id1.text, new FunctionType($returnType, $params));}
                    ;
 
-//parameter: ID ':' simple_type ;
-
 parameters returns[List<VariableDefinition> ast = new ArrayList<>()]:
         id1=ID ':' type1=simple_type {$ast.add(new VariableDefinition($id1.getLine(), $id1.getCharPositionInLine()+1, $id1.text, $type1.ast));}
         (',' id2=ID ':' type2=simple_type {$ast.add(new VariableDefinition($id2.getLine(),$id2.getCharPositionInLine()+1, $id2.text, $type2.ast));})*
         ;
-//
-//variable returns[Variable ast]:
-//          ID {$ast = (new Variable($ID.getLine(), $ID.getCharPositionInLine()+1 ,$ID.text));}
-//          ;
 
 variables returns[List<Variable> ast = new ArrayList<>()]:
          id1=ID { $ast.add(new Variable($id1.getLine(), $id1.getCharPositionInLine() + 1, $id1.getText())); }
          (',' id2=ID { $ast.add(new Variable($id2.getLine(), $id2.getCharPositionInLine() + 1, $id2.getText())); } )*
          ;
 
-//variable_definition returns[List<VariableDefinition> ast = new ArrayList<>()] locals [List<Token> vars = new ArrayList<>()]:
-//              'let' id1=ID {$vars.add($id1);} (',' id2=ID {$vars.add($id2);})* ':' type ';'
-//              {
-//                for(Token var : $vars){
-//                    VariableDefinition varDef = new VariableDefinition(var.getLine(), var.getCharPositionInLine()+1, var.getText(), $type.ast);
-//                    $ast.add(varDef);
-//                }
-//              }
-//              ;
-
 variable_definition returns [ List<VariableDefinition> ast = new ArrayList<VariableDefinition>() ]:
             'let' variables ':' type  ';' {
                 for (Variable v: $variables.ast) {
-                    //$ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast));
-                       VariableDefinition varDef =  new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast);
-                       if(!$ast.contains(varDef)){$ast.add(varDef);}
-                       else{ new ErrorType("La variable " + v.getName() + " ya se ha declarado.", varDef);}
+                    $ast.add( new VariableDefinition(v.getLine(), v.getColumn(), v.getName(), $type.ast));
                 }
             };
 
@@ -136,9 +102,8 @@ simple_type returns[Type ast]:
            | 'char' {$ast = CharType.getInstance();}
            ;
 
-type returns[Type ast] : // locals [List<RecordField> recordFields = new ArrayList<>()]:
+type returns[Type ast] :
     simple_type {$ast = $simple_type.ast;}
-    //| '['  (variable_definition {$recordFields.addAll($variable_definition.ast.stream().map(vDef -> new RecordField(vDef.getLine(), vDef.getColumn(), vDef.getName(), vDef.getType())).toList());})+ ']' {$ast = new RecordType($recordFields);}
     ||  | e='[' (record_field{ $ast = new RecordType($e.getLine(), $e.getCharPositionInLine()+1, $record_field.ast); })+ ']'
     | '[' INT_CONSTANT ']'  type {$ast = new ArrayType(LexerHelper.lexemeToInt($INT_CONSTANT.text), $type.ast);}
     ;
@@ -146,12 +111,11 @@ type returns[Type ast] : // locals [List<RecordField> recordFields = new ArrayLi
 
 record_field returns [ List<RecordField> ast = new ArrayList<RecordField>() ]:
         ('let' variables ':' type ';' {
-
             for (Variable v: $variables.ast) {
-                //$ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast));
-                RecordField recordField = new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast);
-                if(!$ast.contains(recordField)){$ast.add(recordField);}
-                else{new ErrorType("El campo " + v.getName() + " ya se ha declarado", recordField);}
+                $ast.add( new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast));
+//                RecordField recordField = new RecordField(v.getLine(), v.getColumn(), v.getName(), $type.ast);
+//                if(!$ast.contains(recordField)){$ast.add(recordField);}
+//                else{new ErrorType("El campo " + v.getName() + " ya se ha declarado", recordField);}
             }
         })+
        ;

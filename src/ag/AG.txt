@@ -1,0 +1,71 @@
+G: 
+(1)Program: program definition*
+(2)RecordField: recordfield -> ID type
+
+	Definiciones
+(3)VariableDefinition: definition -> type ID
+(4)FunctionDefinition: definition  -> type ID statement*
+
+	Tipos
+(5)IntType: type -> INT
+(6)NumberType: type -> DOUBLE
+(7)CharType: type -> CHAR
+(8)ErrorType: type -> ErrorType
+(9)VoidType: type -> Void
+(10)ArrayTipe: type ->  type [INT_CONSTANT]
+(11)FunctionType: type -> type variabledefinition*
+(12)RecordType: type -> recordfield*
+
+
+	Expresiones
+(13)IntLiteral: expr -> INT_CONSTANT
+(14)CharLiteral: expr -> CHAR_CONSTANT
+(15)NumberLiteral: expr -> NUMBER_CONSTANT
+(16)Variable: expr -> ID
+(17)Arithmetic: expr1 -> expr2 expr3
+(18)Logical: expr1 -> expr2 expr3
+(19)Comparison: expr1 -> expr2 expr3
+(20)Cast: expr1 -> type expr2
+(21)ArrayAccess: expr1 -> expr2 expr3
+(22)FieldAccess: expr1 -> expr2 ID
+(23)FunctionInvocation: expr1 -> expr2 expr3* 
+(24)UnaryMinus: expr1 -> expr2
+(25)UnaryNot: expr1 -> expr2
+	
+	Statements
+(26)While: stmt1 -> expr stmt2*
+(27)Assignment: stmt -> expr1 expr2
+(28)IfElse: stmt1 -> expr stmt2* stmt3*
+(29)Input: stmt -> expr
+(30)Log: stmt -> expr
+(31)Return: stmt -> expr
+
+A:
+{expr.type = Type} (en lugar de igual seria pertenece
+
+
+R: 
+	Expresiones
+(13)expr.type = IntType.getInstance();
+(14)expr.type = CharType.getInstance();
+(15)expr.type = NumberType.getInstance();
+(16)expr.type =  expr.definition.type
+(17) expr1.type = expr2.type.arithmetic(expr3.type,expr1)
+(18) expr1.type = expr2.type.logic(expr3.type,expr1)
+(19) expr1.type = expr2.type.comparison(expr3.type,expr1)
+(20) expr1.type = expr2.type.canBeCastTo(type)
+(21) expr1.type = expr2.type.squareBrackets(expr3.type)
+(22) expr1.type = expr2.type.dot(ID)
+(23) expr1.type = expr2.type.parenthesis(expr3*.type)
+(24) expr1.type = expr2.type.arithmetic()
+(25) expr1.type = expr2.logic()
+
+	
+	Statemens
+(26) expr.type.mustBeLogical()
+(27) expr2.type.mustPromotesTo(expr1.type)
+(28) expr.type.mustBeLogical()
+(29) expr.type.mustBeBuiltIn()
+(30) expr.type.mustBeBuiltIn()
+(31) expr.type.promotesTo(stmt.returnType)
+

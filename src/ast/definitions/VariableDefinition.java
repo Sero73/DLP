@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class VariableDefinition extends AbstractDefinition implements Statement, Definition {
+    private  int offset;
 
     public VariableDefinition(int line, int column, String name, Type type) {
         super(line, column, name, type);
@@ -31,5 +32,13 @@ public class VariableDefinition extends AbstractDefinition implements Statement,
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
         return v.visit(this,param);
+    }
+
+    public int getOffset(){
+        return offset;
+    }
+
+    public void setOffset(int offset){
+        this.offset = offset;
     }
 }

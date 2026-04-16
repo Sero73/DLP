@@ -7,7 +7,6 @@ public class VisitorLValue extends AbstractVisitor<Void,Void> {
 
     @Override
     public Void visit(Arithmetic arithmetic, Void param) {
-        System.out.println("Arithmetic ");
         super.visit(arithmetic, param);
         arithmetic.setLValue(false);
         return null;
@@ -98,7 +97,7 @@ public class VisitorLValue extends AbstractVisitor<Void,Void> {
     public Void visit(Assignment assignment, Void param) {
       super.visit(assignment, param);
         if(!assignment.getLeft().getLValue()){
-            new ErrorType("La parte izquierda de una asignación no es un lValue",assignment.getLeft());
+            new ErrorType("Left side of assignment is not an lValue",assignment.getLeft());
         }
         return null;
     }
@@ -107,8 +106,7 @@ public class VisitorLValue extends AbstractVisitor<Void,Void> {
     public Void visit(Input input, Void param) {
         input.getExpression().accept(this, param);
         if(!input.getExpression().getLValue()){
-            System.out.println("miaus");
-            new ErrorType("La expresión dada no es un lValue",input.getExpression());
+            new ErrorType("Expression provided is not an lValue",input.getExpression());
         }
         return null;
     }

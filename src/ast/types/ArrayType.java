@@ -1,9 +1,10 @@
 package ast.types;
 
+import ast.Locatable;
 import ast.Type;
 import visitor.Visitor;
 
-public class ArrayType implements Type  {
+public class ArrayType extends AbstractType  {
     private int  size;
     private Type type;
 
@@ -23,5 +24,23 @@ public class ArrayType implements Type  {
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
         return v.visit(this,param);
+    }
+
+    @Override
+    public Type squareBrackets(Type type,Locatable locatable){
+        if(type instanceof IntType || type instanceof CharType ){
+            return this.type;
+        }
+        return  super.squareBrackets(type,locatable);
+    }
+
+    @Override
+    public String toString(){
+        return type.toString() + "[size: " + size + "]";
+    }
+
+    @Override
+    public int numberOfBytes() {
+        return type.numberOfBytes() * size;
     }
 }

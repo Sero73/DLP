@@ -56,9 +56,9 @@ public class LexerTest {
 			new LexicalInfo(12, 20, "0.0003", TSmmLexer.REAL_CONSTANT, .0003),
 
 
-			new LexicalInfo(16, 5, "var1", TSmmLexer.IDENTIFIERS, "var1"),
-			new LexicalInfo(16, 11, "_var_1", TSmmLexer.IDENTIFIERS, "_var_1"),
-			new LexicalInfo(16, 19, "VAR_1_AB_2", TSmmLexer.IDENTIFIERS, "VAR_1_AB_2"),
+			new LexicalInfo(16, 5, "var1", TSmmLexer.ID, "var1"),
+			new LexicalInfo(16, 11, "_var_1", TSmmLexer.ID, "_var_1"),
+			new LexicalInfo(16, 19, "VAR_1_AB_2", TSmmLexer.ID, "VAR_1_AB_2"),
 
 			new LexicalInfo(20, 5, "'a'", TSmmLexer.CHAR_CONSTANT, 'a'),
 			new LexicalInfo(20, 10, "'b'", TSmmLexer.CHAR_CONSTANT, 'b'),

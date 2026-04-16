@@ -13,6 +13,7 @@ public abstract class AbstractDefinition extends AbstractLocatable implements De
 
     protected String name;
     protected Type type;
+    public int scope;
 
     public AbstractDefinition(int line, int column, String name, Type type){
         super(line, column);
@@ -29,4 +30,16 @@ public abstract class AbstractDefinition extends AbstractLocatable implements De
     public Type getType() {
         return type;
     }
+
+    @Override
+    public int getScope() {
+        return scope;
+    }
+
+    @Override
+    public void setScope(int scope) {
+        this.scope = scope;
+    }
+
+
 }
