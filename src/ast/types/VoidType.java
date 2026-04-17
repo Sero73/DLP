@@ -24,8 +24,4 @@ public class VoidType extends AbstractType {
         return "void";
     }
 
-    @Override
-    public int numberOfBytes() {
-        throw new UnsupportedOperationException("Variable cannot be null");
-    }
 }

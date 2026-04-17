@@ -20,7 +20,7 @@ public class FunctionType extends AbstractType {
         return returnType;
     }
 
-    public List<VariableDefinition> getVariablesDefinitions() {
+    public List<VariableDefinition> getParameters() {
         return parameters;
     }
 
@@ -62,10 +62,5 @@ public class FunctionType extends AbstractType {
         }
         sb.append(") -> ").append(returnType);
         return sb.toString();
-    }
-
-    @Override
-    public int numberOfBytes() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

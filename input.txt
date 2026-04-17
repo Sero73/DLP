@@ -4,9 +4,9 @@ let r: number; 		//Offset 2
 let c: char; 		//Offset 6
 
 // Functions
-function f(pi:int, pr:number): int {	   
-  let lr:number; 	//Offset -1
-  let li:int;		//Offset -3
+function f(pi:int, pr:number): int {	  //offset 8 offset 4
+  let lr:number; 	//Offset -4
+  let li:int;		//Offset -6
   
   li = pi;
   lr = pr;

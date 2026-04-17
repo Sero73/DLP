@@ -60,10 +60,10 @@ public class RecordType extends AbstractType {
     }
 
     @Override
-    public int numberOfBytes() {
+    public int getNumberOfBytes() {
         int nBytes = 0;
         for(RecordField recordField : recordFields){
-            nBytes += recordField.getType().numberOfBytes();
+            nBytes += recordField.getType().getNumberOfBytes();
         }
         return nBytes;
     }

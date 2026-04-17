@@ -91,7 +91,7 @@ public abstract class AbstractVisitor<RT,PT> implements Visitor<RT,PT> {
 
     @Override
     public RT visit(FunctionType functionType, PT param) {
-        for(VariableDefinition var : functionType.getVariablesDefinitions()){
+        for(VariableDefinition var : functionType.getParameters()){
             var.accept(this, param);
         }
         functionType.getReturnType().accept(this, param);
