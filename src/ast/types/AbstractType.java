@@ -118,4 +118,8 @@ public abstract class AbstractType implements Type {
         throw new UnsupportedOperationException("Not supported type");
     }
 
+    @Override
+    public String suffix(){
+        throw new UnsupportedOperationException("Type does not support suffix");
+    }
 }

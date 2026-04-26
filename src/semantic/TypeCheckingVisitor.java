@@ -1,16 +1,15 @@
-package visitor;
+package semantic;
 
 
 import ast.Expression;
 import ast.Statement;
 import ast.Type;
 import ast.definitions.FunctionDefinition;
-import ast.definitions.VariableDefinition;
 import ast.expressions.*;
 import ast.statements.*;
 import ast.types.*;
+import visitor.AbstractVisitor;
 
-import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Void,Type> {
     @Override
     public Void visit(Arithmetic arithmetic, Type param){
         super.visit(arithmetic, param);
-        arithmetic.setType(arithmetic.getLeft().getType());
+        arithmetic.setType(arithmetic.getLeft().getType().arithmetic(arithmetic.getRight().getType(),arithmetic));
         return null;
     }
 
@@ -63,7 +62,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Void,Type> {
     @Override
     public Void visit(Cast cast, Type param){
         super.visit(cast, param);
-        cast.setType(cast.getType().canBeCastTo(cast.getExpression().getType(),cast));
+        cast.setType(cast.getExpression().getType().canBeCastTo(cast.getCastingType(),cast));
         return null;
     }
 

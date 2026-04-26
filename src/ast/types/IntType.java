@@ -96,4 +96,9 @@ public class IntType extends AbstractType {
     public int getNumberOfBytes() {
         return 2;
     }
+
+    @Override
+    public String suffix(){
+        return "i";
+    }
 }

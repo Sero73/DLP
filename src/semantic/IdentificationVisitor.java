@@ -1,4 +1,4 @@
-package visitor;
+package semantic;
 
 import ast.Definition;
 import ast.definitions.FunctionDefinition;
@@ -8,6 +8,7 @@ import ast.types.ErrorType;
 import ast.types.RecordField;
 import ast.types.RecordType;
 import symboltable.SymbolTable;
+import visitor.AbstractVisitor;
 
 import java.util.HashMap;
 import java.util.Map;

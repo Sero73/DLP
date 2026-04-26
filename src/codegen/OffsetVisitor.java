@@ -1,4 +1,4 @@
-package visitor;
+package codegen;
 
 import ast.Statement;
 import ast.definitions.FunctionDefinition;
@@ -6,8 +6,9 @@ import ast.definitions.VariableDefinition;
 import ast.types.FunctionType;
 import ast.types.RecordField;
 import ast.types.RecordType;
+import visitor.AbstractVisitor;
 
-public class OffsetVisitor extends AbstractVisitor<Void,Void>{
+public class OffsetVisitor extends AbstractVisitor<Void,Void> {
     int localOffsetCount = 0;
     int globalOffsetCount = 0;
 
@@ -48,10 +49,13 @@ public class OffsetVisitor extends AbstractVisitor<Void,Void>{
     @Override
     public Void visit(FunctionDefinition functionDefinition, Void param) {
         this.localOffsetCount = 0;
-        functionDefinition.getType().accept(this, param);
-        for(Statement st : functionDefinition.getStatements())  {
-            st.accept(this, param);
-        }
+//        functionDefinition.getType().accept(this, param);
+//        for(Statement st : functionDefinition.getStatements())  {
+//            st.accept(this, param);
+//            functionDefinition.setLocalBytes(-localOffsetCount);
+//        }
+        super.visit(functionDefinition, param);
+        functionDefinition.setLocalBytes(-localOffsetCount);
         return null;
     }
 }

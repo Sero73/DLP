@@ -10,6 +10,8 @@ import java.util.List;
 public class FunctionType extends AbstractType {
     private Type returnType;
     private List<VariableDefinition> parameters;
+    private int returnBytes;
+    private int parameterBytes;
 
     public FunctionType(Type returnType, List<VariableDefinition> parameters) {
         this.returnType = returnType;
@@ -24,6 +26,21 @@ public class FunctionType extends AbstractType {
         return parameters;
     }
 
+    public int getReturnBytes() {
+        return returnBytes;
+    }
+
+    public void setReturnBytes(int returnBytes) {
+        this.returnBytes = returnBytes;
+    }
+
+    public int getParameterBytes() {
+        return parameterBytes;
+    }
+
+    public void setParameterBytes(int parameterBytes) {
+        this.parameterBytes = parameterBytes;
+    }
 
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {

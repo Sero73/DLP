@@ -10,6 +10,7 @@ import java.util.List;
 
 public class FunctionDefinition extends AbstractDefinition implements Definition {
     private List<Statement> statements;
+    private int localBytes;
 
     public FunctionDefinition(int line, int column, List<Statement> statements, String name, Type type) {
         super(line, column, name, type);
@@ -18,6 +19,14 @@ public class FunctionDefinition extends AbstractDefinition implements Definition
 
     public List<Statement> getStatements() {
         return statements;
+    }
+
+    public void setLocalBytes(int localBytes){
+        this.localBytes = localBytes;
+    }
+
+    public int getLocalBytes() {
+        return localBytes;
     }
 
     @Override

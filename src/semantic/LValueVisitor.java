@@ -1,9 +1,10 @@
-package visitor;
+package semantic;
 import ast.expressions.*;
 import ast.statements.*;
 import ast.types.*;
+import visitor.AbstractVisitor;
 
-public class VisitorLValue extends AbstractVisitor<Void,Void> {
+public class LValueVisitor extends AbstractVisitor<Void,Void> {
 
     @Override
     public Void visit(Arithmetic arithmetic, Void param) {
