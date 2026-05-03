@@ -120,6 +120,6 @@ public abstract class AbstractType implements Type {
 
     @Override
     public String suffix(){
-        throw new UnsupportedOperationException("Type does not support suffix");
+        throw new UnsupportedOperationException(toString() + " Type does not support suffix");
     }
 }

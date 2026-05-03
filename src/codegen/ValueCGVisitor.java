@@ -62,16 +62,11 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void,Void> {
 
     @Override
     public Void visit(Comparison comparison, Void param) {
-//        comparison.getLeft().accept(this, param);
-//        codeGenerator.convertTo(comparison.getLeft().getType(), comparison.getType());
-//        comparison.getRight().accept(this, param);
-//        codeGenerator.convertTo(comparison.getRight().getType(), comparison.getType());
-//        codeGenerator.comparison(comparison.getOperator(),comparison.getType());
-        Type comparisonType = comparison.getLeft().getType();
+        Type typeToPromote = codeGenerator.getBiggerType(comparison.getLeft().getType(), comparison.getRight().getType());
         comparison.getLeft().accept(this, param);
         comparison.getRight().accept(this, param);
-        codeGenerator.convertTo(comparison.getRight().getType(), comparisonType);
-        codeGenerator.comparison(comparison.getOperator(), comparisonType);
+        codeGenerator.convertTo(comparison.getRight().getType(), typeToPromote);
+        codeGenerator.comparison(comparison.getOperator(), typeToPromote);
         return null;
     }
 
@@ -109,6 +104,20 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void,Void> {
             codeGenerator.convertTo(functionInvocation.getArguments().get(i).getType(), ((FunctionType)functionInvocation.getVariable().getDefinition()).getParameters().get(i).getType());
         }
         codeGenerator.call(functionInvocation.getVariable().getName());
+        return null;
+    }
+
+    @Override
+    public Void visit(FieldAccess fieldAccess, Void param) {
+        fieldAccess.accept(addressCGVisitor, param);
+        codeGenerator.load(fieldAccess.getType());
+        return null;
+    }
+
+    @Override
+    public Void visit(ArrayAccess arrayAccess, Void param) {
+        arrayAccess.accept(addressCGVisitor,param);
+        codeGenerator.load(arrayAccess.getType());
         return null;
     }
 

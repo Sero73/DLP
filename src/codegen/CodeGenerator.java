@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 
 public class CodeGenerator {
     private PrintWriter out;
+    private int label = 0;
 
     public CodeGenerator(String outputFilename, String sourceFilename) {
         try{
@@ -47,13 +48,25 @@ public class CodeGenerator {
         this.out.flush();
     }
 
-    public void call(String name){
-        out.println("\tcall\t" + name);
-        this.out.flush();
+    public Type getBiggerType(Type left, Type right) {
+        if (left.suffix().equals(right.suffix())) {
+            return left;
+        }
+
+        if (left.suffix().equals("f") || right.suffix().equals("f")) {
+            return (left.suffix().equals("f")) ? left : right;
+        }
+
+        if (left.suffix().equals("i") || right.suffix().equals("i")) {
+            return (left.suffix().equals("i")) ? left : right;
+        }
+
+        return left;
     }
 
+    //Main
     public void callMain(){
-        out.println("\n' Invocation to the main function'");
+        out.println("\n' Invocation to the main function");
         out.println("call main");
         this.out.flush();
     }
@@ -63,6 +76,7 @@ public class CodeGenerator {
         this.out.flush();
     }
 
+    //Pila
     public void store(Type type) {
         out.println("\tstore" + type.suffix());
         this.out.flush();
@@ -228,6 +242,11 @@ public class CodeGenerator {
     }
 
     //Functions
+    public void call(String name){
+        out.println("\tcall\t" + name);
+        this.out.flush();
+    }
+
     public void ret(int returnSize, int localSize, int paramSize){
         out.println("\tret\t" + returnSize + "," + localSize + "," + paramSize);
         this.out.flush();
@@ -243,7 +262,33 @@ public class CodeGenerator {
         this.out.flush();
     }
 
-    //Comentarios Mapple
+    //Jumps
+
+    public String getLabel(){
+        return "label" + this.label++;
+    }
+
+    public void label(String labelName){
+        out.println(" " + labelName + ":");
+        this.out.flush();
+    }
+
+    public void jmp(String label){
+        out.println("\tjmp\t" + label);
+        this.out.flush();
+    }
+
+    public void jz(String label){
+        out.println("\tjz\t" + label);
+        this.out.flush();
+    }
+
+    public void jnz(String label){
+        out.println("\tjnz\t" + label);
+        this.out.flush();
+    }
+
+    //Comentarios Mapl
 
     public void commentSource(String source){
         out.println("\n#source \"" + source + "\"\n");

@@ -1,7 +1,11 @@
 package codegen;
 
 import ast.definitions.VariableDefinition;
+import ast.expressions.ArrayAccess;
+import ast.expressions.FieldAccess;
 import ast.expressions.Variable;
+import ast.types.IntType;
+import ast.types.RecordType;
 
 public class AddressCGVisitor extends AbstractCGVisitor<Void,Void> {
     private  CodeGenerator codeGenerator;
@@ -22,8 +26,27 @@ public class AddressCGVisitor extends AbstractCGVisitor<Void,Void> {
         }else{
             codeGenerator.pushBP();
             codeGenerator.push(((VariableDefinition)variable.getDefinition()).getOffset());
-            codeGenerator.add(variable.getType());
+            codeGenerator.add(IntType.getInstance());
         }
+        return null;
+    }
+
+    @Override
+    public Void visit(FieldAccess fieldAccess, Void param) {
+        fieldAccess.getExpression().accept(this,param);
+        codeGenerator.push(((RecordType)fieldAccess.getExpression().getType()).getField(fieldAccess.getName()).getOffset());
+        codeGenerator.add(IntType.getInstance());
+        return null;
+    }
+
+    @Override
+    public Void visit(ArrayAccess arrayAccess, Void param) {
+        arrayAccess.getLeft().accept(this,param);
+        arrayAccess.getRight().accept(valueCGVisitor,param);
+        codeGenerator.convertTo(arrayAccess.getRight().getType(), IntType.getInstance());
+        codeGenerator.push(arrayAccess.getType().getNumberOfBytes());
+        codeGenerator.mul(IntType.getInstance());
+        codeGenerator.add(IntType.getInstance());
         return null;
     }
 }

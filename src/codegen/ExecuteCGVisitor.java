@@ -6,10 +6,9 @@ import ast.Statement;
 import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;
 import ast.expressions.Cast;
-import ast.statements.Assignment;
-import ast.statements.Input;
-import ast.statements.Log;
+import ast.statements.*;
 import ast.types.FunctionType;
+import ast.types.IntType;
 import visitor.AbstractVisitor;
 
 public class ExecuteCGVisitor extends AbstractCGVisitor<Void,Void> {
@@ -120,6 +119,43 @@ public class ExecuteCGVisitor extends AbstractCGVisitor<Void,Void> {
                 def.accept(this, param);
             }
         }
+        return null;
+    }
+
+    @Override
+    public Void visit(While while_, Void param){
+        codeGenerator.commentLine(while_.getLine());
+        codeGenerator.comment("While");
+        String condition = codeGenerator.getLabel();
+        String end = codeGenerator.getLabel();
+        codeGenerator.label(condition);
+        while_.getCondition().accept(valueCGVisitor,param);
+        codeGenerator.convertTo(while_.getCondition().getType(), IntType.getInstance());
+        codeGenerator.jz(end);
+        codeGenerator.comment("While body");
+        while_.getBody().forEach(s-> s.accept(this,param));
+        codeGenerator.jmp(condition);
+        codeGenerator.label(end);
+        return null;
+    }
+
+    @Override
+    public Void visit(IfElse ifElse, Void param) {
+        codeGenerator.commentLine(ifElse.getLine());
+        codeGenerator.comment("If");
+        codeGenerator.commentLine(ifElse.getLine());
+        String else_ = codeGenerator.getLabel();
+        String end = codeGenerator.getLabel();
+        ifElse.getCondition().accept(valueCGVisitor,param);
+        codeGenerator.convertTo(ifElse.getCondition().getType(),IntType.getInstance());
+        codeGenerator.jz(else_);
+        codeGenerator.comment("If body");
+        ifElse.getIfBody().forEach(s-> s.accept(this,param));
+        codeGenerator.jmp(end);
+        codeGenerator.label(else_);
+        codeGenerator.comment("Else body");
+        ifElse.getElseBody().forEach(s-> s.accept(this,param));
+        codeGenerator.label(end);
         return null;
     }
 
