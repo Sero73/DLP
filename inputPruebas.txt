@@ -1,0 +1,138 @@
+// Variables globales
+let arrayBits: [5]char;
+let registro: [
+    let caracter: char;
+    let entero: int;
+    let real: number;
+];
+
+function testLogicaChar(): void {
+    let charVerdadero: char;
+    let charFalso: char;
+
+    charVerdadero = 'V';
+    charFalso = (0 as char);
+
+    log 'L', 'O', 'G', 'I', 'C', 'A', ':', '\n';
+
+    if (charVerdadero && 'T') { log '1', '.', ' ', 'A', 'N', 'D', ' ', 'O', 'K', '\n'; }
+    if (!charFalso)           { log '2', '.', ' ', 'N', 'O', 'T', ' ', 'O', 'K', '\n'; }
+    if (charFalso || 1)       { log '3', '.', ' ', 'O', 'R', ' ', 'O', 'K', '\n'; }
+}
+
+function testPromociones(): void {
+    let c: char;
+    let i: int;
+    let n: number;
+
+    log 'P', 'R', 'O', 'M', 'O', 'C', 'I', 'O', 'N', 'E', 'S', ':', '\n';
+
+    c = 'A';
+    i = c;
+    log i, '\n';
+
+    n = i + 0.1;
+    log n, '\n';
+
+    n = c + 0.2;
+    log n, '\n';
+}
+
+function testCasts(): void {
+    let c: char;
+    let i: int;
+    let n: number;
+
+    log 'C', 'A', 'S', 'T', 'S', ':', '\n';
+
+    n = 66.9;
+    i = (n as int);
+    c = (i as char);
+
+    log c, ' ', i, '\n';
+}
+
+function testComparaciones(): void {
+    let c: char;
+    let i: int;
+    let n: number;
+
+    c = 'B';
+    i = 66;
+    n = 66.5;
+
+    log 'C', 'O', 'M', 'P', 'A', 'R', 'A', 'C', 'I', 'O', 'N', ':', '\n';
+
+    if (c == i) { log '1', '.', ' ', 'E', 'Q', ' ', 'O', 'K', '\n'; }
+    if (i < n)  { log '2', '.', ' ', 'L', 'T', ' ', 'O', 'K', '\n'; }
+    if (n > c)  { log '3', '.', ' ', 'G', 'T', ' ', 'O', 'K', '\n'; }
+}
+
+function testAnidados(): void {
+    let i, j, sum: int;
+
+    log 'A', 'N', 'I', 'D', 'A', 'D', 'O', 'S', ':', '\n';
+
+    i = 10;
+    if (i > 5) {
+        if (i == 10) {
+            log 'I', 'f', ' ', 'O', 'K', '\n';
+        } else {
+            log 'E', 'R', 'R', 'O', 'R', '\n';
+        }
+    } else {
+        log 'E', 'R', 'R', 'O', 'R', '\n';
+    }
+
+    sum = 0;
+    i = 0;
+    while (i < 3) {
+        j = 0;
+        while (j < 2) {
+            sum = sum + 1;
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+
+    if (sum == 6) {
+        log 'W', 'h', 'i', 'l', 'e', ' ', 'O', 'K', '\n';
+    } else {
+        log 'E', 'R', 'R', 'O', 'R', '\n';
+    }
+}
+
+function testEntrada(): void {
+    let valorDoble: int;
+
+    log 'I', 'N', 'P', 'U', 'T', ':', '\n';
+    log 'D', 'a', 'm', 'e', ' ', 'u', 'n', ' ', 'n', 'u', 'm', 'e', 'r', 'o', ':', ' ';
+
+    input valorDoble;
+
+    valorDoble = valorDoble * 2;
+    log 'D', 'o', 'b', 'l', 'e', ':', ' ', valorDoble, '\n';
+}
+
+function testJefeFinal(): number {
+    arrayBits[0] = 'a';
+    registro.caracter = 'b';
+    registro.entero = 3;
+
+    registro.real = (arrayBits[0] + registro.caracter) / registro.entero + 10.5;
+    return registro.real;
+}
+
+// MAIN
+function main(): void {
+    testLogicaChar();
+    testPromociones();
+    testCasts();
+    testComparaciones();
+    testAnidados();
+
+    testEntrada();
+
+    log 'F', 'I', 'N', 'A', 'L', ':', ' ';
+    log testJefeFinal(), '\n';
+}

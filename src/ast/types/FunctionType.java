@@ -26,22 +26,6 @@ public class FunctionType extends AbstractType {
         return parameters;
     }
 
-    public int getReturnBytes() {
-        return returnBytes;
-    }
-
-    public void setReturnBytes(int returnBytes) {
-        this.returnBytes = returnBytes;
-    }
-
-    public int getParameterBytes() {
-        return parameterBytes;
-    }
-
-    public void setParameterBytes(int parameterBytes) {
-        this.parameterBytes = parameterBytes;
-    }
-
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
         return v.visit(this,param);

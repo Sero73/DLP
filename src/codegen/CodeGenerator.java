@@ -1,6 +1,8 @@
 package codegen;
 
 import ast.Type;
+import ast.types.IntType;
+import ast.types.NumberType;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -128,15 +130,14 @@ public class CodeGenerator {
     }
 
     //Unary Minus
-    public void neg(){
-        out.println("\tneg");
-        this.out.flush();
+    public void unaryMinus(Type type) {
+       if(type.suffix().equals("f")) {
+           push(0.0);
+       }else{
+           push(0);
+       }
     }
 
-    public void negf(){
-        out.println("\tnegf");
-        this.out.flush();
-    }
 
     //Arithmetic
     public void arithmetic(String operator, Type type){

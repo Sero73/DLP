@@ -34,6 +34,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Void,Type> {
 
     @Override
     public Void visit(Variable variable, Type param){
+
         variable.setType(variable.getDefinition().getType());
         return null;
     }
