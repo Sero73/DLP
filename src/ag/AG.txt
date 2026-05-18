@@ -41,7 +41,7 @@ G:
 (31)Return: stmt -> expr
 
 A:
-{expr.type = Type} (en lugar de igual seria pertenece
+{expr.type = Type} (en lugar de igual seria pertenece)
 
 
 R: 

@@ -14,7 +14,6 @@ public class CharType extends AbstractType {
         }
         return instance;
     }
-
     
     @Override
     public <RT, PT> RT accept(Visitor<RT, PT> v, PT param) {
@@ -24,6 +23,11 @@ public class CharType extends AbstractType {
     @Override
     public void mustBeBuiltIn(Locatable locatable) {
         //CharType is a built-in type
+    }
+
+    @Override
+    public void mustBeLogical(Locatable locatable) {
+        //Char es un tipo logico porque promociona a int
     }
 
     @Override

@@ -9,7 +9,7 @@ call main
 halt
 
 
-#line	10
+#line	9
 
  testLogicaChar:
 	' * Parameters:
@@ -19,7 +19,7 @@ halt
 	enter	2
 	' * Function body:
 
-#line	14
+#line	13
 	' * Assignment
 	push	bp
 	pushi	-1
@@ -27,7 +27,7 @@ halt
 	pushb	86
 	storeb
 
-#line	15
+#line	14
 	' * Assignment
 	push	bp
 	pushi	-2
@@ -36,50 +36,50 @@ halt
 	i2b
 	storeb
 
-#line	17
+#line	16
 	' * Write
 	pushb	76
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	79
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	71
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	73
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	67
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	65
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	58
 	outb
 
-#line	17
+#line	16
 	' * Write
 	pushb	10
 	outb
 
-#line	19
+#line	18
 	' * If
 
-#line	19
+#line	18
 	push	bp
 	pushi	-1
 	addi
@@ -91,52 +91,52 @@ halt
 	jz	label0
 	' * If body
 
-#line	19
+#line	18
 	' * Write
 	pushb	49
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	46
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	32
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	65
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	78
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	68
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	32
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	79
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	75
 	outb
 
-#line	19
+#line	18
 	' * Write
 	pushb	10
 	outb
@@ -145,10 +145,10 @@ halt
 	' * Else body
  label1:
 
-#line	20
+#line	19
 	' * If
 
-#line	20
+#line	19
 	push	bp
 	pushi	-2
 	addi
@@ -158,52 +158,52 @@ halt
 	jz	label2
 	' * If body
 
-#line	20
+#line	19
 	' * Write
 	pushb	50
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	46
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	32
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	78
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	79
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	84
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	32
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	79
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	75
 	outb
 
-#line	20
+#line	19
 	' * Write
 	pushb	10
 	outb
@@ -212,10 +212,10 @@ halt
 	' * Else body
  label3:
 
-#line	21
+#line	20
 	' * If
 
-#line	21
+#line	20
 	push	bp
 	pushi	-2
 	addi
@@ -226,47 +226,47 @@ halt
 	jz	label4
 	' * If body
 
-#line	21
+#line	20
 	' * Write
 	pushb	51
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	46
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	32
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	79
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	82
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	32
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	79
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	75
 	outb
 
-#line	21
+#line	20
 	' * Write
 	pushb	10
 	outb
@@ -276,7 +276,7 @@ halt
  label5:
 	ret	0,2,0
 
-#line	25
+#line	23
 
  testPromociones:
 	' * Parameters:
@@ -287,72 +287,72 @@ halt
 	enter	7
 	' * Function body:
 
-#line	30
+#line	28
 	' * Write
 	pushb	80
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	82
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	79
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	77
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	79
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	67
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	73
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	79
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	78
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	69
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	83
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	58
 	outb
 
-#line	30
+#line	28
 	' * Write
 	pushb	10
 	outb
 
-#line	32
+#line	30
 	' * Assignment
 	push	bp
 	pushi	-1
@@ -360,7 +360,7 @@ halt
 	pushb	65
 	storeb
 
-#line	33
+#line	31
 	' * Assignment
 	push	bp
 	pushi	-3
@@ -372,7 +372,7 @@ halt
 	b2i
 	storei
 
-#line	34
+#line	32
 	' * Write
 	push	bp
 	pushi	-3
@@ -380,12 +380,12 @@ halt
 	loadi
 	outi
 
-#line	34
+#line	32
 	' * Write
 	pushb	10
 	outb
 
-#line	36
+#line	34
 	' * Assignment
 	push	bp
 	pushi	-7
@@ -399,7 +399,7 @@ halt
 	addf
 	storef
 
-#line	37
+#line	35
 	' * Write
 	push	bp
 	pushi	-7
@@ -407,12 +407,12 @@ halt
 	loadf
 	outf
 
-#line	37
+#line	35
 	' * Write
 	pushb	10
 	outb
 
-#line	39
+#line	37
 	' * Assignment
 	push	bp
 	pushi	-7
@@ -427,7 +427,7 @@ halt
 	addf
 	storef
 
-#line	40
+#line	38
 	' * Write
 	push	bp
 	pushi	-7
@@ -435,13 +435,13 @@ halt
 	loadf
 	outf
 
-#line	40
+#line	38
 	' * Write
 	pushb	10
 	outb
 	ret	0,7,0
 
-#line	44
+#line	41
 
  testCasts:
 	' * Parameters:
@@ -452,42 +452,42 @@ halt
 	enter	7
 	' * Function body:
 
-#line	49
+#line	46
 	' * Write
 	pushb	67
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	65
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	83
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	84
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	83
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	58
 	outb
 
-#line	49
+#line	46
 	' * Write
 	pushb	10
 	outb
 
-#line	51
+#line	48
 	' * Assignment
 	push	bp
 	pushi	-7
@@ -495,7 +495,7 @@ halt
 	pushf	66.9
 	storef
 
-#line	52
+#line	49
 	' * Assignment
 	push	bp
 	pushi	-3
@@ -507,7 +507,7 @@ halt
 	f2i
 	storei
 
-#line	53
+#line	50
 	' * Assignment
 	push	bp
 	pushi	-1
@@ -519,7 +519,7 @@ halt
 	i2b
 	storeb
 
-#line	55
+#line	52
 	' * Write
 	push	bp
 	pushi	-1
@@ -527,12 +527,12 @@ halt
 	loadb
 	outb
 
-#line	55
+#line	52
 	' * Write
 	pushb	32
 	outb
 
-#line	55
+#line	52
 	' * Write
 	push	bp
 	pushi	-3
@@ -540,13 +540,13 @@ halt
 	loadi
 	outi
 
-#line	55
+#line	52
 	' * Write
 	pushb	10
 	outb
 	ret	0,7,0
 
-#line	59
+#line	55
 
  testComparaciones:
 	' * Parameters:
@@ -557,7 +557,7 @@ halt
 	enter	7
 	' * Function body:
 
-#line	64
+#line	60
 	' * Assignment
 	push	bp
 	pushi	-1
@@ -565,7 +565,7 @@ halt
 	pushb	66
 	storeb
 
-#line	65
+#line	61
 	' * Assignment
 	push	bp
 	pushi	-3
@@ -573,7 +573,7 @@ halt
 	pushi	66
 	storei
 
-#line	66
+#line	62
 	' * Assignment
 	push	bp
 	pushi	-7
@@ -581,75 +581,75 @@ halt
 	pushf	66.5
 	storef
 
-#line	68
+#line	64
 	' * Write
 	pushb	67
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	79
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	77
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	80
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	65
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	82
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	65
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	67
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	73
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	79
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	78
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	58
 	outb
 
-#line	68
+#line	64
 	' * Write
 	pushb	10
 	outb
 
-#line	70
+#line	66
 	' * If
 
-#line	70
+#line	66
 	push	bp
 	pushi	-1
 	addi
@@ -663,47 +663,47 @@ halt
 	jz	label6
 	' * If body
 
-#line	70
+#line	66
 	' * Write
 	pushb	49
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	46
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	32
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	69
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	81
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	32
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	79
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	75
 	outb
 
-#line	70
+#line	66
 	' * Write
 	pushb	10
 	outb
@@ -712,10 +712,10 @@ halt
 	' * Else body
  label7:
 
-#line	71
+#line	67
 	' * If
 
-#line	71
+#line	67
 	push	bp
 	pushi	-3
 	addi
@@ -729,47 +729,47 @@ halt
 	jz	label8
 	' * If body
 
-#line	71
+#line	67
 	' * Write
 	pushb	50
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	46
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	32
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	76
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	84
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	32
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	79
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	75
 	outb
 
-#line	71
+#line	67
 	' * Write
 	pushb	10
 	outb
@@ -778,10 +778,10 @@ halt
 	' * Else body
  label9:
 
-#line	72
+#line	68
 	' * If
 
-#line	72
+#line	68
 	push	bp
 	pushi	-7
 	addi
@@ -796,47 +796,47 @@ halt
 	jz	label10
 	' * If body
 
-#line	72
+#line	68
 	' * Write
 	pushb	51
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	46
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	32
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	71
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	84
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	32
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	79
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	75
 	outb
 
-#line	72
+#line	68
 	' * Write
 	pushb	10
 	outb
@@ -846,7 +846,7 @@ halt
  label11:
 	ret	0,7,0
 
-#line	76
+#line	71
 
  testAnidados:
 	' * Parameters:
@@ -857,57 +857,57 @@ halt
 	enter	6
 	' * Function body:
 
-#line	79
+#line	74
 	' * Write
 	pushb	65
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	78
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	73
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	68
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	65
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	68
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	79
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	83
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	58
 	outb
 
-#line	79
+#line	74
 	' * Write
 	pushb	10
 	outb
 
-#line	81
+#line	76
 	' * Assignment
 	push	bp
 	pushi	-2
@@ -915,10 +915,10 @@ halt
 	pushi	10
 	storei
 
-#line	82
+#line	77
 	' * If
 
-#line	82
+#line	77
 	push	bp
 	pushi	-2
 	addi
@@ -928,10 +928,10 @@ halt
 	jz	label12
 	' * If body
 
-#line	83
+#line	78
 	' * If
 
-#line	83
+#line	78
 	push	bp
 	pushi	-2
 	addi
@@ -941,32 +941,32 @@ halt
 	jz	label14
 	' * If body
 
-#line	84
+#line	79
 	' * Write
 	pushb	73
 	outb
 
-#line	84
+#line	79
 	' * Write
 	pushb	102
 	outb
 
-#line	84
+#line	79
 	' * Write
 	pushb	32
 	outb
 
-#line	84
+#line	79
 	' * Write
 	pushb	79
 	outb
 
-#line	84
+#line	79
 	' * Write
 	pushb	75
 	outb
 
-#line	84
+#line	79
 	' * Write
 	pushb	10
 	outb
@@ -974,32 +974,32 @@ halt
  label14:
 	' * Else body
 
-#line	86
+#line	81
 	' * Write
 	pushb	69
 	outb
 
-#line	86
+#line	81
 	' * Write
 	pushb	82
 	outb
 
-#line	86
+#line	81
 	' * Write
 	pushb	82
 	outb
 
-#line	86
+#line	81
 	' * Write
 	pushb	79
 	outb
 
-#line	86
+#line	81
 	' * Write
 	pushb	82
 	outb
 
-#line	86
+#line	81
 	' * Write
 	pushb	10
 	outb
@@ -1008,38 +1008,38 @@ halt
  label12:
 	' * Else body
 
-#line	89
+#line	84
 	' * Write
 	pushb	69
 	outb
 
-#line	89
+#line	84
 	' * Write
 	pushb	82
 	outb
 
-#line	89
+#line	84
 	' * Write
 	pushb	82
 	outb
 
-#line	89
+#line	84
 	' * Write
 	pushb	79
 	outb
 
-#line	89
+#line	84
 	' * Write
 	pushb	82
 	outb
 
-#line	89
+#line	84
 	' * Write
 	pushb	10
 	outb
  label13:
 
-#line	92
+#line	87
 	' * Assignment
 	push	bp
 	pushi	-6
@@ -1047,7 +1047,7 @@ halt
 	pushi	0
 	storei
 
-#line	93
+#line	88
 	' * Assignment
 	push	bp
 	pushi	-2
@@ -1055,7 +1055,7 @@ halt
 	pushi	0
 	storei
 
-#line	94
+#line	89
 	' * While
  label16:
 	push	bp
@@ -1067,7 +1067,7 @@ halt
 	jz	label17
 	' * While body
 
-#line	95
+#line	90
 	' * Assignment
 	push	bp
 	pushi	-4
@@ -1075,7 +1075,7 @@ halt
 	pushi	0
 	storei
 
-#line	96
+#line	91
 	' * While
  label18:
 	push	bp
@@ -1087,7 +1087,7 @@ halt
 	jz	label19
 	' * While body
 
-#line	97
+#line	92
 	' * Assignment
 	push	bp
 	pushi	-6
@@ -1100,7 +1100,7 @@ halt
 	addi
 	storei
 
-#line	98
+#line	93
 	' * Assignment
 	push	bp
 	pushi	-4
@@ -1115,7 +1115,7 @@ halt
 	jmp	label18
  label19:
 
-#line	100
+#line	95
 	' * Assignment
 	push	bp
 	pushi	-2
@@ -1130,10 +1130,10 @@ halt
 	jmp	label16
  label17:
 
-#line	103
+#line	98
 	' * If
 
-#line	103
+#line	98
 	push	bp
 	pushi	-6
 	addi
@@ -1143,47 +1143,47 @@ halt
 	jz	label20
 	' * If body
 
-#line	104
+#line	99
 	' * Write
 	pushb	87
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	104
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	105
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	108
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	101
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	32
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	79
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	75
 	outb
 
-#line	104
+#line	99
 	' * Write
 	pushb	10
 	outb
@@ -1191,39 +1191,39 @@ halt
  label20:
 	' * Else body
 
-#line	106
+#line	101
 	' * Write
 	pushb	69
 	outb
 
-#line	106
+#line	101
 	' * Write
 	pushb	82
 	outb
 
-#line	106
+#line	101
 	' * Write
 	pushb	82
 	outb
 
-#line	106
+#line	101
 	' * Write
 	pushb	79
 	outb
 
-#line	106
+#line	101
 	' * Write
 	pushb	82
 	outb
 
-#line	106
+#line	101
 	' * Write
 	pushb	10
 	outb
  label21:
 	ret	0,6,0
 
-#line	111
+#line	105
 
  testEntrada:
 	' * Parameters:
@@ -1232,122 +1232,122 @@ halt
 	enter	2
 	' * Function body:
 
-#line	114
+#line	108
 	' * Write
 	pushb	73
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	78
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	80
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	85
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	84
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	58
 	outb
 
-#line	114
+#line	108
 	' * Write
 	pushb	10
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	68
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	97
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	109
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	101
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	32
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	117
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	110
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	32
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	110
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	117
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	109
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	101
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	114
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	111
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	58
 	outb
 
-#line	115
+#line	109
 	' * Write
 	pushb	32
 	outb
 
-#line	118
+#line	111
 	' * Read
 	push	bp
 	pushi	-2
@@ -1355,7 +1355,7 @@ halt
 	ini
 	storei
 
-#line	120
+#line	113
 	' * Assignment
 	push	bp
 	pushi	-2
@@ -1368,42 +1368,42 @@ halt
 	muli
 	storei
 
-#line	121
+#line	114
 	' * Write
 	pushb	68
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	111
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	98
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	108
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	101
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	58
 	outb
 
-#line	121
+#line	114
 	' * Write
 	pushb	32
 	outb
 
-#line	121
+#line	114
 	' * Write
 	push	bp
 	pushi	-2
@@ -1411,13 +1411,13 @@ halt
 	loadi
 	outi
 
-#line	121
+#line	114
 	' * Write
 	pushb	10
 	outb
 	ret	0,2,0
 
-#line	125
+#line	117
 
  testJefeFinal:
 	' * Parameters:
@@ -1425,7 +1425,7 @@ halt
 	enter	0
 	' * Function body:
 
-#line	126
+#line	118
 	' * Assignment
 	pusha	0
 	pushi	0
@@ -1435,7 +1435,7 @@ halt
 	pushb	97
 	storeb
 
-#line	127
+#line	119
 	' * Assignment
 	pusha	5
 	pushi	0
@@ -1443,7 +1443,7 @@ halt
 	pushb	98
 	storeb
 
-#line	128
+#line	120
 	' * Assignment
 	pusha	5
 	pushi	1
@@ -1451,7 +1451,7 @@ halt
 	pushi	3
 	storei
 
-#line	130
+#line	122
 	' * Assignment
 	pusha	5
 	pushi	3
@@ -1479,7 +1479,7 @@ halt
 	addf
 	storef
 
-#line	131
+#line	123
 	' * Return
 	pusha	5
 	pushi	3
@@ -1487,7 +1487,7 @@ halt
 	loadf
 	ret	4,0,0
 
-#line	135
+#line	127
 
  main:
 	' * Parameters:
@@ -1495,71 +1495,71 @@ halt
 	enter	0
 	' * Function body:
 
-#line	136
+#line	128
 	' * Invocation to testLogicaChar
 	call	testLogicaChar
 
-#line	137
+#line	129
 	' * Invocation to testPromociones
 	call	testPromociones
 
-#line	138
+#line	130
 	' * Invocation to testCasts
 	call	testCasts
 
-#line	139
+#line	131
 	' * Invocation to testComparaciones
 	call	testComparaciones
 
-#line	140
+#line	132
 	' * Invocation to testAnidados
 	call	testAnidados
 
-#line	143
+#line	134
 	' * Invocation to testEntrada
 	call	testEntrada
 
-#line	145
+#line	136
 	' * Write
 	pushb	70
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	73
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	78
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	65
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	76
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	58
 	outb
 
-#line	145
+#line	136
 	' * Write
 	pushb	32
 	outb
 
-#line	146
+#line	137
 	' * Write
 	call	testJefeFinal
 	outf
 
-#line	146
+#line	137
 	' * Write
 	pushb	10
 	outb

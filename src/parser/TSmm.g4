@@ -104,7 +104,7 @@ simple_type returns[Type ast]:
 
 type returns[Type ast] :
     simple_type {$ast = $simple_type.ast;}
-    ||  | e='[' (record_field{ $ast = new RecordType($e.getLine(), $e.getCharPositionInLine()+1, $record_field.ast); })+ ']'
+    | e='[' (record_field{ $ast = new RecordType($e.getLine(), $e.getCharPositionInLine()+1, $record_field.ast); }) ']'
     | '[' INT_CONSTANT ']'  type {$ast = new ArrayType(LexerHelper.lexemeToInt($INT_CONSTANT.text), $type.ast);}
     ;
 
